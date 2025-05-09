@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">PCOS Prediction Statistics</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Overall Statistics</h5>
+                                    <canvas id="predictionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Age Distribution</h5>
+                                    <canvas id="ageChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">BMI Distribution</h5>
+                                    <canvas id="bmiChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Symptom Prevalence</h5>
+                                    <canvas id="symptomsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Key Insights</h5>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <h3>{{ total_predictions }}</h3>
+                                                <p>Total Predictions</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <h3>{{ high_risk_percentage }}%</h3>
+                                                <p>High Risk Cases</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <h3>{{ avg_probability }}%</h3>
+                                                <p>Average Probability</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Prediction Distribution Chart
+const predictionCtx = document.getElementById('predictionChart').getContext('2d');
+new Chart(predictionCtx, {
+    type: 'pie',
+    data: {
+        labels: ['High Risk', 'Low Risk'],
+        datasets: [{
+            data: [{{ high_risk_count }}, {{ low_risk_count }}],
+            backgroundColor: ['#ffc107', '#28a745']
+        }]
+    }
+});
+
+// Age Distribution Chart
+const ageCtx = document.getElementById('ageChart').getContext('2d');
+new Chart(ageCtx, {
+    type: 'bar',
+    data: {
+        labels: {{ age_labels|safe }},
+        datasets: [{
+            label: 'Number of Cases',
+            data: {{ age_data|safe }},
+            backgroundColor: '#007bff'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// BMI Distribution Chart
+const bmiCtx = document.getElementById('bmiChart').getContext('2d');
+new Chart(bmiCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Underweight', 'Normal', 'Overweight', 'Obese'],
+        datasets: [{
+            label: 'Number of Cases',
+            data: {{ bmi_data|safe }},
+            backgroundColor: '#17a2b8'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Symptoms Chart
+const symptomsCtx = document.getElementById('symptomsChart').getContext('2d');
+new Chart(symptomsCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Weight Gain', 'Hair Growth', 'Skin Darkening'],
+        datasets: [{
+            label: 'Prevalence',
+            data: {{ symptoms_data|safe }},
+            backgroundColor: '#6f42c1'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                    callback: function(value) {
+                        return value + '%';
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
+
+{% endblock %} 

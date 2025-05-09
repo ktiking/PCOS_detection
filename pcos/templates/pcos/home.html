@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow form-card">
+                <div class="card-body p-5">
+                    <div class="text-center mb-5">
+                        <i class="fas fa-heartbeat fa-3x text-primary mb-3"></i>
+                        <h1 class="display-4 fw-bold">Welcome to PCOS Detection</h1>
+                        <p class="lead text-muted">A machine learning-based tool to help detect Polycystic Ovary Syndrome (PCOS)</p>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-stethoscope fa-2x text-primary me-3"></i>
+                                        <h5 class="card-title mb-0">Get Started</h5>
+                                    </div>
+                                    <p class="card-text text-muted">Take our PCOS prediction test to assess your risk factors and get personalized insights.</p>
+                                    <a href="{% url 'prediction_form' %}" class="btn btn-primary w-100">
+                                        <i class="fas fa-arrow-right me-2"></i>Start Prediction
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-chart-bar fa-2x text-info me-3"></i>
+                                        <h5 class="card-title mb-0">View Statistics</h5>
+                                    </div>
+                                    <p class="card-text text-muted">Explore statistics and insights from previous predictions to understand PCOS trends.</p>
+                                    <a href="{% url 'statistics' %}" class="btn btn-info w-100">
+                                        <i class="fas fa-chart-line me-2"></i>View Statistics
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <h3 class="fw-bold mb-4">
+                            <i class="fas fa-info-circle text-primary me-2"></i>
+                            About PCOS
+                        </h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">What is PCOS?</h5>
+                                        <p class="card-text text-muted">Polycystic Ovary Syndrome (PCOS) is a hormonal disorder common among women of reproductive age. Women with PCOS may have infrequent or prolonged menstrual periods or excess male hormone (androgen) levels.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">How Our Tool Works</h5>
+                                        <p class="card-text text-muted">Our tool uses advanced machine learning to analyze various factors and provide a risk assessment for PCOS. We consider multiple parameters to give you accurate and personalized results.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

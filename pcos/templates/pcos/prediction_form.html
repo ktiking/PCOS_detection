@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow form-card">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-stethoscope fa-3x text-primary mb-3"></i>
+                        <h2 class="fw-bold">PCOS Prediction Form</h2>
+                        <p class="text-muted">Please fill out all fields accurately for the most reliable prediction</p>
+                    </div>
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <i class="fas fa-user text-primary me-2"></i>Basic Information
+                                        </h5>
+                                        <div class="mb-3">
+                                            <label for="age" class="form-label fw-bold">Age (years)</label>
+                                            <input type="number" class="form-control form-control-lg" id="age" name="age" 
+                                                   placeholder="Enter your age" required min="0" max="100">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Your current age in years
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="weight" class="form-label fw-bold">Weight (Kg)</label>
+                                            <input type="number" class="form-control form-control-lg" id="weight" name="weight" 
+                                                   placeholder="Enter your weight" required min="0" step="0.1">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Your current weight in kilograms
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bmi" class="form-label fw-bold">BMI (Body Mass Index)</label>
+                                            <input type="number" class="form-control form-control-lg" id="bmi" name="bmi" 
+                                                   placeholder="Enter your BMI" required min="0" step="0.1">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Your Body Mass Index (weight in kg / height in m²)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <i class="fas fa-calendar-alt text-primary me-2"></i>Cycle Information
+                                        </h5>
+                                        <div class="mb-3">
+                                            <label for="cycle" class="form-label fw-bold">Cycle Regularity</label>
+                                            <select class="form-select form-select-lg" id="cycle" name="cycle" required>
+                                                <option value="">Select cycle regularity...</option>
+                                                <option value="R">Regular</option>
+                                                <option value="I">Irregular</option>
+                                            </select>
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Whether your menstrual cycle is regular or irregular
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cycle_length" class="form-label fw-bold">Cycle Length (days)</label>
+                                            <input type="number" class="form-control form-control-lg" id="cycle_length" name="cycle_length" 
+                                                   placeholder="Enter cycle length" required min="0">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Average length of your menstrual cycle in days
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lh_fsh_ratio" class="form-label fw-bold">LH/FSH Ratio</label>
+                                            <input type="number" class="form-control form-control-lg" id="lh_fsh_ratio" name="lh_fsh_ratio" 
+                                                   placeholder="Enter LH/FSH ratio" required min="0" step="0.1">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Ratio of Luteinizing Hormone to Follicle Stimulating Hormone
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <i class="fas fa-exclamation-circle text-primary me-2"></i>Symptoms
+                                        </h5>
+                                        <div class="mb-3">
+                                            <label for="weight_gain" class="form-label fw-bold">Weight Gain</label>
+                                            <select class="form-select form-select-lg" id="weight_gain" name="weight_gain" required>
+                                                <option value="">Select weight gain status...</option>
+                                                <option value="Y">Yes</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Have you experienced unexplained weight gain?
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hair_growth" class="form-label fw-bold">Hair Growth</label>
+                                            <select class="form-select form-select-lg" id="hair_growth" name="hair_growth" required>
+                                                <option value="">Select hair growth status...</option>
+                                                <option value="Y">Yes</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Do you experience excessive hair growth?
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="skin_darkening" class="form-label fw-bold">Skin Darkening</label>
+                                            <select class="form-select form-select-lg" id="skin_darkening" name="skin_darkening" required>
+                                                <option value="">Select skin darkening status...</option>
+                                                <option value="Y">Yes</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Do you experience skin darkening or discoloration?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <i class="fas fa-chart-line text-primary me-2"></i>Measurements
+                                        </h5>
+                                        <div class="mb-3">
+                                            <label for="follicle_no_l" class="form-label fw-bold">Follicle Number (Left)</label>
+                                            <input type="number" class="form-control form-control-lg" id="follicle_no_l" name="follicle_no_l" 
+                                                   placeholder="Enter left follicle count" required min="0">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Number of follicles in left ovary from ultrasound
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="follicle_no_r" class="form-label fw-bold">Follicle Number (Right)</label>
+                                            <input type="number" class="form-control form-control-lg" id="follicle_no_r" name="follicle_no_r" 
+                                                   placeholder="Enter right follicle count" required min="0">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Number of follicles in right ovary from ultrasound
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hip" class="form-label fw-bold">Hip (inches)</label>
+                                            <input type="number" class="form-control form-control-lg" id="hip" name="hip" 
+                                                   placeholder="Enter hip measurement" required min="0" step="0.1">
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Hip circumference measurement in inches
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <i class="fas fa-heart text-primary me-2"></i>Lifestyle
+                                        </h5>
+                                        <div class="mb-3">
+                                            <label for="lifestyle_score" class="form-label fw-bold">Lifestyle Score</label>
+                                            <select class="form-select form-select-lg" id="lifestyle_score" name="lifestyle_score" required>
+                                                <option value="">Select lifestyle score...</option>
+                                                <option value="-1">Poor (-1)</option>
+                                                <option value="0">Moderate (0)</option>
+                                                <option value="1">Good (1)</option>
+                                            </select>
+                                            <div class="form-text text-muted mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Overall assessment of your lifestyle habits
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-calculator me-2"></i>Get Prediction
+                            </button>
+                            <a href="{% url 'home' %}" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+// Form validation
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock %}
+
+{% endblock %} 

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">PCOS Prediction Result</h2>
+                    
+                    <div class="text-center mb-4">
+                        {% if prediction.prediction == 1 %}
+                            <div class="alert alert-warning">
+                                <h4 class="alert-heading">High Risk of PCOS</h4>
+                                <p>Based on the provided information, there is a high probability of PCOS.</p>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success">
+                                <h4 class="alert-heading">Low Risk of PCOS</h4>
+                                <p>Based on the provided information, there is a low probability of PCOS.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Prediction Details</h5>
+                                    <p class="card-text">
+                                        <strong>Probability:</strong> {{ prediction.probability|floatformat:2 }}%<br>
+                                        <strong>Result:</strong> {% if prediction.prediction == 1 %}High Risk{% else %}Low Risk{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Next Steps</h5>
+                                    <p class="card-text">
+                                        {% if prediction.prediction == 1 %}
+                                            We recommend consulting with a healthcare professional for further evaluation and guidance.
+                                        {% else %}
+                                            Continue monitoring your health and maintain regular check-ups with your healthcare provider.
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h4>Important Notes</h4>
+                        <ul>
+                            <li>This prediction is based on machine learning analysis and should not replace professional medical advice.</li>
+                            <li>Always consult with healthcare professionals for proper diagnosis and treatment.</li>
+                            <li>Regular check-ups and monitoring are important for maintaining good health.</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="{% url 'prediction_form' %}" class="btn btn-primary">New Prediction</a>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
