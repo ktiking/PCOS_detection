@@ -46,6 +46,4 @@ python manage.py runserver
 ## Features
 - User authentication
 - PCOS detection system
-- Patient management
-- Medical history tracking
-- Results analysis 
+- Users Statistics
