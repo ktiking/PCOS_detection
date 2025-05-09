@@ -30,15 +30,11 @@ pip install -r requirements.txt
 
 5. Run migrations:
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
-6. Create superuser:
-```bash
-python manage.py createsuperuser
-```
-
-7. Run the development server:
+6. Run the development server:
 ```bash
 python manage.py runserver
 ```
